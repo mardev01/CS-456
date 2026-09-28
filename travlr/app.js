@@ -8,6 +8,8 @@ var handlebars = require('hbs');
 var indexRouter = require('./app_server/routes/index');
 var usersRouter = require('./app_server/routes/users');
 var travelRouter = require('./app_server/routes/travel');
+const { connect } = require('./app_server/models/db');
+connect().catch((err) => console.error('Database startup failed:', err));
 
 var app = express();
 
