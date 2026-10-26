@@ -1,0 +1,7 @@
+<div id="header"><div id="logo"><a href="/"><img src="/images/logo.png" alt="Travlr Getaways" height="100" width="200"></a></div>
+<nav id="navigation" aria-label="Main navigation"><ul>
+<li><a href="/">Home</a></li><li><a href="/travel">Travel</a></li><li><a href="/news">News</a></li>
+{{#if currentCustomer}}<li><a href="/reservations">Reservations</a></li>{{/if}}
+<li><a href="/admin">Admin</a></li><li><a href="/checkout">Checkout</a></li>
+{{#if currentCustomer}}<li><a href="/account/profile">My Account</a></li>{{else}}<li><a href="/account/login">Login</a></li>{{/if}}
+</ul></nav></div>

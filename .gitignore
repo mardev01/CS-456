@@ -1,2 +1,12 @@
 node_modules/
 .env
+**/node_modules/
+**/.angular/
+**/dist/
+**/coverage/
+**/.DS_Store
+**/._*
+**/.env
+**/.env.*
+!**/.env.example
+**/~$*

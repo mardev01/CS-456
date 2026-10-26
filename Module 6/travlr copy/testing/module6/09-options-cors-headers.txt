@@ -1,0 +1,11 @@
+HTTP/1.1 204 No Content
+X-Powered-By: Express
+Access-Control-Allow-Origin: http://localhost:4200
+Vary: Origin
+Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS
+Access-Control-Allow-Headers: Content-Type, Authorization
+ETag: W/"a-bAsFyilMr4Ra1hIU5PyoyFRunpI"
+Date: Mon, 12 Oct 2026 02:31:27 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+

@@ -1,0 +1,14 @@
+<article class="card h-100 shadow-sm">
+      <img class="card-img-top trip-image" [src]="'assets/images/' + trip.image" [alt]="trip.name">
+      <div class="card-body">
+        <h3 class="h5 card-title">{{ trip.name }}</h3>
+        <p class="text-muted mb-2">{{ trip.resort }}</p>
+        <p>{{ trip.length }} · {{ trip.start | date:'mediumDate':'UTC' }}</p>
+        <p class="fw-semibold">{{ trip.perPerson | currency:'USD' }} per person</p>
+        <div class="card-text" [innerHTML]="trip.description"></div>
+      </div>
+      <div class="card-footer bg-white d-flex gap-2">
+        <a class="btn btn-outline-primary" [routerLink]="['/edit-trip', trip.code]">Edit Trip</a>
+        <button type="button" class="btn btn-outline-danger" [disabled]="deleting" (click)="remove.emit(trip)">{{ deleting ? 'Deleting...' : 'Delete Trip' }}</button>
+      </div>
+    </article>

@@ -1,0 +1,17 @@
+
+> travlr@0.0.0 start
+> node ./bin/www
+
+Mongoose connected to mongodb://127.0.0.1:27017/travlr
+[0mGET /api/trips [32m200 [0m26.848 ms - 1878[0m
+[0mOPTIONS /api/trips [32m204 [0m0.639 ms - -[0m
+[0mGET /api/trips [32m200 [0m3.041 ms - 1878[0m
+[0mGET /api/trips [32m200 [0m38.896 ms - 1878[0m
+[0mGET /api/trips/GALR210214 [32m200 [0m37.496 ms - 599[0m
+[0mGET /api/trips/NOTFOUND [33m404 [0m6.963 ms - 28[0m
+[0mGET /api/trips/NOTFOUND [33m404 [0m38.350 ms - 28[0m
+[0mGET /api/trips [32m200 [0m9.997 ms - 1878[0m
+[0mGET /api/trips/GALR210214 [32m200 [0m4.067 ms - 599[0m
+[0mGET /api/trips/GALR210214ttp://localhost:3000/api/trips [33m404 [0m34.830 ms - 1163[0m
+[0mGET /api/trips [32m200 [0m26.100 ms - 1878[0m
+[0mGET /api/trips/NOTFOUND [33m404 [0m36.555 ms - 28[0m

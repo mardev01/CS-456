@@ -1,0 +1,35 @@
+[
+  {
+    "test": "Valid PUT",
+    "status": 200,
+    "result": "PASS",
+    "response": {
+      "_id": "6acc4c890d195f6ecdca5689",
+      "code": "M6POST2027",
+      "name": "Module Six API Test Trip Updated",
+      "length": "2 nights / 3 days",
+      "start": "2027-07-10T00:00:00.000Z",
+      "resort": "API Test Resort",
+      "perPerson": "599.00",
+      "image": "reef1.jpg",
+      "description": "<p>Temporary trip for POST PUT and DELETE endpoint testing.</p>",
+      "__v": 0
+    }
+  },
+  {
+    "test": "Invalid PUT",
+    "status": 400,
+    "result": "PASS",
+    "response": {
+      "message": "Trip code must match the existing trip"
+    }
+  },
+  {
+    "test": "Missing trip PUT",
+    "status": 404,
+    "result": "PASS",
+    "response": {
+      "message": "Trip not found"
+    }
+  }
+]

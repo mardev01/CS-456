@@ -1,0 +1,27 @@
+
+> travlr@0.0.0 start
+> node ./bin/www
+
+Mongoose connected to mongodb://127.0.0.1:27017/travlr
+[0mGET /api/trips [36m304 [0m39.320 ms - -[0m
+[0mOPTIONS /api/trips [32m204 [0m2.476 ms - -[0m
+[0mPOST /api/trips [32m201 [0m51.679 ms - 339[0m
+[0mGET /api/trips [32m200 [0m5.655 ms - 2218[0m
+[0mGET /api/trips [36m304 [0m11.143 ms - -[0m
+[0mGET /api/trips [36m304 [0m40.337 ms - -[0m
+[0mGET /api/trips [32m200 [0m4.245 ms - 2218[0m
+[0mGET /travel [32m200 [0m56.612 ms - 4967[0m
+[0mGET /images/reef1.jpg [36m304 [0m1.953 ms - -[0m
+[0mGET /css/style.css [36m304 [0m4.322 ms - -[0m
+[0mGET /images/logo.png [36m304 [0m3.178 ms - -[0m
+[0mGET /images/reef2.jpg [36m304 [0m1.204 ms - -[0m
+[0mGET /images/reef3.jpg [36m304 [0m0.372 ms - -[0m
+[0mGET /images/bg-pattern.jpg [36m304 [0m1.205 ms - -[0m
+[0mGET /images/bg-navigation.png [36m304 [0m1.474 ms - -[0m
+[0mGET /images/bg-body.jpg [36m304 [0m1.918 ms - -[0m
+[0mGET /images/bg-menu.png [36m304 [0m3.474 ms - -[0m
+[0mGET /images/content-box.png [36m304 [0m0.250 ms - -[0m
+[0mGET /images/icons.png [36m304 [0m0.169 ms - -[0m
+[0mPOST /api/trips [32m201 [0m64.557 ms - 308[0m
+[0mPOST /api/trips [33m400 [0m8.323 ms - 329[0m
+[0mPOST /api/trips [32m201 [0m28.531 ms - 308[0m

@@ -1,0 +1,8 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>{{title}} - Travlr Getaways</title><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/customer.css"></head><body><div id="background"><div id="page">{{> header }}<main id="contents"><div class="box"><div><div class="body customer-body"><h1>{{title}}</h1>{{#if error}}<p class="notice error" role="alert">{{error}}</p>{{/if}}
+{{#if saved}}<p class="notice" role="status">Your reservation is confirmed and saved.</p>{{/if}}
+<h2>{{reservation.trip.name}}</h2><img class="itinerary-image" src="/images/{{reservation.trip.image}}" alt="{{reservation.trip.name}}">
+<dl class="trip-details"><dt>Reservation</dt><dd>{{reservation.reference}}</dd><dt>Status</dt><dd>{{reservation.status}}</dd><dt>Traveler</dt><dd>{{currentCustomer.name}}</dd><dt>Start date</dt><dd>{{reservation.dateLabel}}</dd><dt>Length of stay</dt><dd>{{reservation.trip.length}}</dd><dt>Resort</dt><dd>{{reservation.trip.resort}}</dd><dt>Travelers</dt><dd>{{reservation.travelers}}</dd><dt>Price per person</dt><dd>{{reservation.priceLabel}}</dd><dt>Total</dt><dd>{{reservation.totalLabel}}</dd></dl>
+<p>Your itinerary keeps the trip details and price from the time you reserved. No payment has been collected online.</p>
+{{#if reservation.canCancel}}<form method="post" action="/reservations/{{reservation.id}}/cancel"><input type="hidden" name="_csrf" value="{{csrfToken}}"><button type="submit" class="secondary">Cancel Reservation</button></form>{{/if}}
+<p><a href="/reservations">Back to my reservations</a></p>
+</div></div></div></main></div>{{> footer }}</div></body></html>

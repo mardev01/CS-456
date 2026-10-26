@@ -1,0 +1,9 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>{{title}} - Travlr Getaways</title><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/customer.css"></head><body><div id="background"><div id="page">{{> header }}<main id="contents"><div class="box"><div><div class="body customer-body"><h1>{{title}}</h1>{{#if error}}<p class="notice error" role="alert">{{error}}</p>{{/if}}
+<h2>{{trip.name}}</h2><p>{{trip.resort}}<br>{{trip.length}} &middot; {{trip.dateLabel}}<br><strong>{{trip.priceLabel}} per person</strong></p>
+{{#if trip.available}}<form method="post" action="/checkout" class="account-form">
+<input type="hidden" name="_csrf" value="{{csrfToken}}"><input type="hidden" name="tripCode" value="{{trip.code}}"><input type="hidden" name="requestKey" value="{{requestKey}}">
+<label for="travelers">Number of travelers</label><input id="travelers" name="travelers" type="number" value="1" min="1" max="10" step="1" required>
+<p><strong>Reservation total: <output id="reservation-total" data-price-cents="{{trip.priceCents}}" for="travelers">{{trip.priceLabel}}</output></strong></p><p>No payment is collected online. Your itinerary will show the confirmed total.</p>
+<button type="submit">Confirm Reservation</button></form>{{else}}<p>This trip has already departed. Choose a future trip to make a reservation.</p>{{/if}}
+<p><a href="/travel">Back to trips</a></p>
+</div></div></div></main></div>{{> footer }}</div><script src="/js/checkout.js" defer></script></body></html>

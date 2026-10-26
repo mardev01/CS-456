@@ -1,0 +1,52 @@
+<h2 class="h4 mb-4">Edit Trip</h2>
+<p *ngIf="error" class="alert alert-danger" role="alert">{{ error }}</p>
+<p *ngIf="loading && !error" role="status">Loading trip...</p>
+<form *ngIf="!loading && editForm.controls['code'].value" [formGroup]="editForm" (ngSubmit)="onSubmit()" class="card card-body" novalidate>
+  <div class="row g-3">
+    <div class="col-md-6">
+      <label for="code" class="form-label">Trip code</label>
+      <input id="code" type="text" formControlName="code" class="form-control">
+      <div *ngIf="submitted && editForm.controls['code'].invalid" class="text-danger mt-1">Enter a valid trip code.</div>
+    </div>
+    <div class="col-md-6">
+      <label for="name" class="form-label">Trip name</label>
+      <input id="name" type="text" formControlName="name" class="form-control">
+      <div *ngIf="submitted && editForm.controls['name'].invalid" class="text-danger mt-1">Enter a valid trip name.</div>
+    </div>
+    <div class="col-md-6">
+      <label for="length" class="form-label">Length</label>
+      <input id="length" type="text" formControlName="length" class="form-control">
+      <div *ngIf="submitted && editForm.controls['length'].invalid" class="text-danger mt-1">Enter a valid length.</div>
+    </div>
+    <div class="col-md-6">
+      <label for="start" class="form-label">Start date</label>
+      <input id="start" type="date" formControlName="start" class="form-control">
+      <div *ngIf="submitted && editForm.controls['start'].invalid" class="text-danger mt-1">Enter a valid start date.</div>
+    </div>
+    <div class="col-md-6">
+      <label for="resort" class="form-label">Resort</label>
+      <input id="resort" type="text" formControlName="resort" class="form-control">
+      <div *ngIf="submitted && editForm.controls['resort'].invalid" class="text-danger mt-1">Enter a valid resort.</div>
+    </div>
+    <div class="col-md-6">
+      <label for="perPerson" class="form-label">Price per person</label>
+      <input id="perPerson" type="number" formControlName="perPerson" class="form-control" min="0" step="0.01">
+      <div *ngIf="submitted && editForm.controls['perPerson'].invalid" class="text-danger mt-1">Enter a valid price per person.</div>
+    </div>
+    <div class="col-md-6">
+      <label for="image" class="form-label">Image filename</label>
+      <input id="image" type="text" formControlName="image" class="form-control">
+      <div class="form-text">Use reef1.jpg, reef2.jpg, or reef3.jpg.</div>
+      <div *ngIf="submitted && editForm.controls['image'].invalid" class="text-danger mt-1">Enter a valid image filename.</div>
+    </div>
+    <div class="col-12">
+      <label for="description" class="form-label">Description</label>
+      <textarea id="description" formControlName="description" class="form-control" rows="4"></textarea>
+      <div *ngIf="submitted && editForm.controls['description'].invalid" class="text-danger mt-1">Enter a valid description.</div>
+    </div>
+  </div>
+  <div class="d-flex gap-2 mt-4">
+    <button type="submit" class="btn btn-primary" [disabled]="saving">{{ saving ? 'Saving...' : 'Save Changes' }}</button>
+    <a routerLink="/" class="btn btn-outline-secondary">Cancel</a>
+  </div>
+</form>

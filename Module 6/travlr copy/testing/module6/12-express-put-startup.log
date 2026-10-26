@@ -1,0 +1,81 @@
+
+> travlr@0.0.0 start
+> node ./bin/www
+
+Mongoose connected to mongodb://127.0.0.1:27017/travlr
+[0mGET /api/trips [32m200 [0m29.711 ms - 2527[0m
+[0mGET /api/trips/M6CORAL2027 [32m200 [0m29.344 ms - 341[0m
+[0mOPTIONS /api/trips/M6CORAL2027 [32m204 [0m8.175 ms - -[0m
+(node:50130) [MONGOOSE] Warning: mongoose: the `new` option for `findOneAndUpdate()` and `findOneAndReplace()` is deprecated. Use `returnDocument: 'after'` instead.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[0mPUT /api/trips/M6CORAL2027 [32m200 [0m71.840 ms - 346[0m
+[0mGET /api/trips [32m200 [0m9.401 ms - 2534[0m
+[0mGET /api/trips [32m200 [0m2.673 ms - 2534[0m
+[0mGET /travel [32m200 [0m73.911 ms - 5317[0m
+[0mGET /images/reef1.jpg [36m304 [0m1.594 ms - -[0m
+[0mGET /css/style.css [36m304 [0m0.738 ms - -[0m
+[0mGET /images/logo.png [36m304 [0m0.833 ms - -[0m
+[0mGET /images/reef2.jpg [36m304 [0m1.101 ms - -[0m
+[0mGET /images/reef3.jpg [36m304 [0m0.682 ms - -[0m
+[0mGET /images/bg-body.jpg [36m304 [0m0.785 ms - -[0m
+[0mGET /images/bg-pattern.jpg [36m304 [0m1.516 ms - -[0m
+[0mGET /images/bg-navigation.png [36m304 [0m2.448 ms - -[0m
+[0mGET /images/bg-menu.png [36m304 [0m1.086 ms - -[0m
+[0mGET /images/content-box.png [36m304 [0m1.354 ms - -[0m
+[0mGET /images/icons.png [36m304 [0m0.759 ms - -[0m
+[0mGET /api/trips/M6POST2027 [32m200 [0m7.354 ms - 310[0m
+(node:50130) [MONGOOSE] Warning: mongoose: the `new` option for `findOneAndUpdate()` and `findOneAndReplace()` is deprecated. Use `returnDocument: 'after'` instead.
+[0mPUT /api/trips/M6POST2027 [32m200 [0m12.964 ms - 316[0m
+[0mPUT /api/trips/M6POST2027 [33m400 [0m0.935 ms - 52[0m
+[0mPUT /api/trips/NOTFOUND [33m404 [0m0.637 ms - 28[0m
+[0mGET /api/trips [32m200 [0m75.176 ms - 2542[0m
+[0mGET /travel [31m500 [0m143.011 ms - 1518[0m
+Error: Failed to lookup view "error" in views directory "/Users/marwan/Downloads/Module 1/CS-456/travlr/app_server/views"
+    at Function.render (/Users/marwan/Downloads/Module 1/CS-456/travlr/node_modules/express/lib/application.js:580:17)
+    at ServerResponse.render (/Users/marwan/Downloads/Module 1/CS-456/travlr/node_modules/express/lib/response.js:1008:7)
+    at /Users/marwan/Downloads/Module 1/CS-456/travlr/app.js:58:7
+    at Layer.handle_error (/Users/marwan/Downloads/Module 1/CS-456/travlr/node_modules/express/lib/router/layer.js:71:5)
+    at trim_prefix (/Users/marwan/Downloads/Module 1/CS-456/travlr/node_modules/express/lib/router/index.js:315:13)
+    at /Users/marwan/Downloads/Module 1/CS-456/travlr/node_modules/express/lib/router/index.js:284:7
+    at Function.process_params (/Users/marwan/Downloads/Module 1/CS-456/travlr/node_modules/express/lib/router/index.js:335:12)
+    at next (/Users/marwan/Downloads/Module 1/CS-456/travlr/node_modules/express/lib/router/index.js:275:10)
+    at Layer.handle_error (/Users/marwan/Downloads/Module 1/CS-456/travlr/node_modules/express/lib/router/layer.js:67:12)
+    at trim_prefix (/Users/marwan/Downloads/Module 1/CS-456/travlr/node_modules/express/lib/router/index.js:315:13)
+[0mGET /api/trips [32m200 [0m41.365 ms - 2542[0m
+[0mGET / [31m500 [0m16.089 ms - 1518[0m
+Error: Failed to lookup view "error" in views directory "/Users/marwan/Downloads/Module 1/CS-456/travlr/app_server/views"
+    at Function.render (/Users/marwan/Downloads/Module 1/CS-456/travlr/node_modules/express/lib/application.js:580:17)
+    at ServerResponse.render (/Users/marwan/Downloads/Module 1/CS-456/travlr/node_modules/express/lib/response.js:1008:7)
+    at /Users/marwan/Downloads/Module 1/CS-456/travlr/app.js:58:7
+    at Layer.handle_error (/Users/marwan/Downloads/Module 1/CS-456/travlr/node_modules/express/lib/router/layer.js:71:5)
+    at trim_prefix (/Users/marwan/Downloads/Module 1/CS-456/travlr/node_modules/express/lib/router/index.js:315:13)
+    at /Users/marwan/Downloads/Module 1/CS-456/travlr/node_modules/express/lib/router/index.js:284:7
+    at Function.process_params (/Users/marwan/Downloads/Module 1/CS-456/travlr/node_modules/express/lib/router/index.js:335:12)
+    at next (/Users/marwan/Downloads/Module 1/CS-456/travlr/node_modules/express/lib/router/index.js:275:10)
+    at Layer.handle_error (/Users/marwan/Downloads/Module 1/CS-456/travlr/node_modules/express/lib/router/layer.js:67:12)
+    at trim_prefix (/Users/marwan/Downloads/Module 1/CS-456/travlr/node_modules/express/lib/router/index.js:315:13)
+[0mGET /favicon.ico [33m404 [0m3.304 ms - 1481[0m
+Error: Failed to lookup view "error" in views directory "/Users/marwan/Downloads/Module 1/CS-456/travlr/app_server/views"
+    at Function.render (/Users/marwan/Downloads/Module 1/CS-456/travlr/node_modules/express/lib/application.js:580:17)
+    at ServerResponse.render (/Users/marwan/Downloads/Module 1/CS-456/travlr/node_modules/express/lib/response.js:1008:7)
+    at /Users/marwan/Downloads/Module 1/CS-456/travlr/app.js:58:7
+    at Layer.handle_error (/Users/marwan/Downloads/Module 1/CS-456/travlr/node_modules/express/lib/router/layer.js:71:5)
+    at trim_prefix (/Users/marwan/Downloads/Module 1/CS-456/travlr/node_modules/express/lib/router/index.js:315:13)
+    at /Users/marwan/Downloads/Module 1/CS-456/travlr/node_modules/express/lib/router/index.js:284:7
+    at Function.process_params (/Users/marwan/Downloads/Module 1/CS-456/travlr/node_modules/express/lib/router/index.js:335:12)
+    at next (/Users/marwan/Downloads/Module 1/CS-456/travlr/node_modules/express/lib/router/index.js:275:10)
+    at /Users/marwan/Downloads/Module 1/CS-456/travlr/app.js:47:3
+    at Layer.handle [as handle_request] (/Users/marwan/Downloads/Module 1/CS-456/travlr/node_modules/express/lib/router/layer.js:95:5)
+[0mGET /api/trips [32m200 [0m9.454 ms - 2542[0m
+[0mGET /travel [31m500 [0m19.729 ms - 1518[0m
+Error: Failed to lookup view "error" in views directory "/Users/marwan/Downloads/Module 1/CS-456/travlr/app_server/views"
+    at Function.render (/Users/marwan/Downloads/Module 1/CS-456/travlr/node_modules/express/lib/application.js:580:17)
+    at ServerResponse.render (/Users/marwan/Downloads/Module 1/CS-456/travlr/node_modules/express/lib/response.js:1008:7)
+    at /Users/marwan/Downloads/Module 1/CS-456/travlr/app.js:58:7
+    at Layer.handle_error (/Users/marwan/Downloads/Module 1/CS-456/travlr/node_modules/express/lib/router/layer.js:71:5)
+    at trim_prefix (/Users/marwan/Downloads/Module 1/CS-456/travlr/node_modules/express/lib/router/index.js:315:13)
+    at /Users/marwan/Downloads/Module 1/CS-456/travlr/node_modules/express/lib/router/index.js:284:7
+    at Function.process_params (/Users/marwan/Downloads/Module 1/CS-456/travlr/node_modules/express/lib/router/index.js:335:12)
+    at next (/Users/marwan/Downloads/Module 1/CS-456/travlr/node_modules/express/lib/router/index.js:275:10)
+    at Layer.handle_error (/Users/marwan/Downloads/Module 1/CS-456/travlr/node_modules/express/lib/router/layer.js:67:12)
+    at trim_prefix (/Users/marwan/Downloads/Module 1/CS-456/travlr/node_modules/express/lib/router/index.js:315:13)

@@ -1,0 +1,85 @@
+npm warn deprecated har-validator@5.1.5: this library is no longer supported
+npm warn deprecated uuid@3.4.0: uuid@10 and below is no longer supported.  For ESM codebases, update to uuid@latest.  For CommonJS codebases, use uuid@11 (but be aware this version will likely be deprecated in 2028).
+npm warn deprecated uuid@8.3.2: uuid@10 and below is no longer supported.  For ESM codebases, update to uuid@latest.  For CommonJS codebases, use uuid@11 (but be aware this version will likely be deprecated in 2028).
+npm warn deprecated @faker-js/faker@5.5.3: Please update to a newer version.
+newman
+
+Travlr Final API and Security Tests
+
+→ Public GET all trips
+  GET http://localhost:3000/api/trips [200 OK, 3.28kB, 35ms]
+  ✓  Expected status 200
+  ✓  JSON response
+  ✓  Trip list
+
+→ Missing trip returns 404
+  GET http://localhost:3000/api/trips/NO_SUCH_FINAL_TRIP [404 Not Found, 431B, 7ms]
+  ✓  Expected status 404
+  ✓  JSON response
+
+→ Unsigned write blocked
+  POST http://localhost:3000/api/trips [401 Unauthorized, 444B, 2ms]
+  ✓  Expected status 401
+  ✓  JSON response
+
+→ Incorrect password rejected
+  POST http://localhost:3000/api/login [401 Unauthorized, 525B, 37ms]
+  ✓  Expected status 401
+  ✓  JSON response
+
+→ Administrator login
+  POST http://localhost:3000/api/login [200 OK, 783B, 37ms]
+  ✓  Expected status 200
+  ✓  JSON response
+  ✓  Token issued
+
+→ POST trip
+  POST http://localhost:3000/api/trips [201 Created, 653B, 14ms]
+  ✓  Expected status 201
+  ✓  JSON response
+
+→ GET saved trip
+  GET http://localhost:3000/api/trips/FINALPOSTMAN [200 OK, 650B, 3ms]
+  ✓  Expected status 200
+  ✓  JSON response
+  ✓  Saved name
+
+→ PUT trip
+  PUT http://localhost:3000/api/trips/FINALPOSTMAN [200 OK, 658B, 9ms]
+  ✓  Expected status 200
+  ✓  JSON response
+
+→ GET persisted update
+  GET http://localhost:3000/api/trips/FINALPOSTMAN [200 OK, 660B, 3ms]
+  ✓  Expected status 200
+  ✓  JSON response
+  ✓  Updated name and price
+
+→ DELETE temporary trip
+  DELETE http://localhost:3000/api/trips/FINALPOSTMAN [204 No Content, 295B, 4ms]
+  ✓  Expected status 204
+
+→ Deleted trip returns 404
+  GET http://localhost:3000/api/trips/FINALPOSTMAN [404 Not Found, 431B, 2ms]
+  ✓  Expected status 404
+  ✓  JSON response
+
+┌─────────────────────────┬──────────────────┬──────────────────┐
+│                         │         executed │           failed │
+├─────────────────────────┼──────────────────┼──────────────────┤
+│              iterations │                1 │                0 │
+├─────────────────────────┼──────────────────┼──────────────────┤
+│                requests │               11 │                0 │
+├─────────────────────────┼──────────────────┼──────────────────┤
+│            test-scripts │               11 │                0 │
+├─────────────────────────┼──────────────────┼──────────────────┤
+│      prerequest-scripts │                0 │                0 │
+├─────────────────────────┼──────────────────┼──────────────────┤
+│              assertions │               25 │                0 │
+├─────────────────────────┴──────────────────┴──────────────────┤
+│ total run duration: 281ms                                     │
+├───────────────────────────────────────────────────────────────┤
+│ total data received: 4.36kB (approx)                          │
+├───────────────────────────────────────────────────────────────┤
+│ average response time: 13ms [min: 2ms, max: 37ms, s.d.: 14ms] │
+└───────────────────────────────────────────────────────────────┘

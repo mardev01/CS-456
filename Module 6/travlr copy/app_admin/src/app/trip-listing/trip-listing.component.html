@@ -1,0 +1,13 @@
+<p *ngIf="updated" class="alert alert-success" role="status">Trip updated successfully.</p>
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h2 class="h4 mb-0">Trip listing</h2>
+  <a routerLink="/add-trip" class="btn btn-primary">Add Trip</a>
+</div>
+<p *ngIf="loading" role="status">Loading trips...</p>
+<p *ngIf="error" class="alert alert-danger" role="alert">{{ error }}</p>
+<p *ngIf="!loading && !error && trips.length === 0">No trips are available.</p>
+<div class="row g-4">
+  <div class="col-md-6 col-lg-4" *ngFor="let trip of trips">
+    <app-trip-card [trip]="trip"></app-trip-card>
+  </div>
+</div>

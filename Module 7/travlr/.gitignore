@@ -1,0 +1,10 @@
+node_modules/
+app_admin/node_modules/
+app_admin/.angular/
+app_admin/dist/
+.env
+.env.*
+!.env.example
+.DS_Store
+.vs/
+*.zip

@@ -1,0 +1,25 @@
+
+> travlr-admin@0.0.0 build
+> ng build
+
+- Building...
+
+Initial chunk files   | Names         |  Raw size | Estimated transfer size
+main-M43IEK64.js      | main          | 279.59 kB |                73.96 kB
+styles-GKPLSGE2.css   | styles        | 226.40 kB |                22.01 kB
+polyfills-FFHMD2TL.js | polyfills     |  33.71 kB |                11.02 kB
+
+                      | Initial total | 539.70 kB |               106.99 kB
+
+Output location: /Users/marwan/Downloads/Module 1/CS-456/travlr/app_admin/dist/travlr-admin
+
+Application bundle generation complete. [7.199 seconds]
+
+▲ [WARNING] bundle initial exceeded maximum budget. Budget 500.00 kB was not met by 39.70 kB with a total of 539.70 kB.
+
+
+▲ [WARNING] 2 rules skipped due to selector errors:
+  .form-floating>~label -> Did not expect successive traversals.
+  .form-floating>~label -> Did not expect successive traversals.
+
+

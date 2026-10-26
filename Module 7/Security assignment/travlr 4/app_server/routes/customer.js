@@ -1,0 +1,18 @@
+const express=require('express');
+const controller=require('../controllers/customer');
+const {session,requireCustomer}=require('../middleware/customer-session');
+const router=express.Router();
+const run=handler=>(req,res,next)=>Promise.resolve(handler(req,res,next)).catch(next);
+router.use(session);
+router.get('/account/login',controller.loginForm);
+router.post('/account/login',run(controller.signIn));
+router.get('/account/register',controller.registerForm);
+router.post('/account/register',run(controller.signUp));
+router.post('/account/logout',controller.signOut);
+router.get('/account/profile',requireCustomer,controller.profile);
+router.get('/checkout',requireCustomer,run(controller.checkout));
+router.post('/checkout',requireCustomer,run(controller.reserve));
+router.get('/reservations',requireCustomer,run(controller.reservations));
+router.get('/reservations/:reservationId',requireCustomer,run(controller.itinerary));
+router.post('/reservations/:reservationId/cancel',requireCustomer,run(controller.cancel));
+module.exports=router;

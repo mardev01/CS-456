@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<!-- Website template by freewebsitetemplates.com -->
+<html>
+<head>
+	<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Travel - Travlr Getaways</title>
+	<link rel="stylesheet" href="/css/style.css" type="text/css">
+<link rel="stylesheet" href="/css/customer.css"></head>
+<body>
+	<div id="background">
+		<div id="page">
+			{{> header }}
+			<div id="contents">
+				<div class="box">
+					<div>
+						<div class="body">
+							<h1>Travel</h1>
+<form class="trip-search" action="/travel" method="get">
+<label for="q">Location or trip name<input id="q" name="q" value="{{q}}" maxlength="80"></label>
+<label for="minPrice">Minimum price<input id="minPrice" name="minPrice" type="number" min="0" step="0.01" value="{{minPrice}}"></label>
+<label for="maxPrice">Maximum price<input id="maxPrice" name="maxPrice" type="number" min="0" step="0.01" value="{{maxPrice}}"></label>
+<button type="submit">Search Trips</button><a href="/travel">Clear</a></form>
+							<ul id="sites">
+								{{#each trips}}
+								<li>
+									<a href="/travel/{{this.code}}">
+										<img src="/images/{{this.image}}" alt="{{this.name}}">
+									</a>
+									<h2>
+										<a href="/travel/{{this.code}}">{{this.name}}</a>
+									</h2>
+									<p class="trip-meta">{{this.resort}}<br>{{this.length}} &middot; {{this.dateLabel}}<br><strong>{{this.priceLabel}} per person</strong></p>
+{{{this.description}}}
+<p><a href="/travel/{{this.code}}">View trip details</a></p>
+								</li>
+								{{/each}}
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		{{> footer }}
+	</div>
+</body>
+</html>

@@ -1,0 +1,19 @@
+{
+  "date": "2026-10-18",
+  "apiTests": 17,
+  "angularTests": 7,
+  "browserChecks": [
+    "Trip search by resort/name and maximum price",
+    "Customer signup returns to checkout",
+    "Two travelers preview $2798 and save at server price",
+    "Customer account shows saved name and email",
+    "Saved itinerary appears in staff reservations",
+    "Staff cancellation appears on customer itinerary",
+    "Staff can disable a customer through Angular PATCH",
+    "Staff settings save and refresh the staff token",
+    "Existing trip edit saves and confirms update",
+    "Customer sign out hides Reservations navigation"
+  ],
+  "cleanup": "Removed only browser-check@travlr.example and its one synthetic reservation after captures. Five real trips and descriptions preserved.",
+  "evidence": "Screenshots 07 through 17 show the new workflows; 10-customer-itinerary-mobile.png is an earlier confirmed-state capture."
+}

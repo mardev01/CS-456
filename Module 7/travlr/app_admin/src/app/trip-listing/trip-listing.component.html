@@ -1,0 +1,21 @@
+<p *ngIf="updated" class="alert alert-success" role="status">Trip updated successfully.</p>
+<p *ngIf="deleted" class="alert alert-success" role="status">Trip deleted successfully.</p>
+<section *ngIf="pendingDelete as trip" class="border rounded p-3 mb-4" aria-label="Confirm trip deletion">
+  <p>Delete {{ trip.name }}? This removes the trip from both websites.</p>
+  <button type="button" class="btn btn-danger me-2" [disabled]="!!deletingCode" (click)="confirmDelete()">Confirm Delete</button>
+  <button type="button" class="btn btn-outline-secondary" [disabled]="!!deletingCode" (click)="pendingDelete = null">Keep Trip</button>
+</section>
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h2 class="h4 mb-0">Trip listing</h2>
+  <a routerLink="/add-trip" class="btn btn-primary">Add Trip</a>
+</div>
+<p *ngIf="loading" role="status">Loading trips...</p>
+<p *ngIf="error" class="alert alert-danger" role="alert">{{ error }}</p>
+<p *ngIf="!loading && !error && trips.length === 0">No trips are available.</p>
+<label for="trip-search" class="form-label">Search travel</label><input id="trip-search" class="form-control mb-4" [(ngModel)]="search">
+<p *ngIf="!loading && trips.length && !filteredTrips.length">No trips match this search.</p>
+<div class="row g-4">
+  <div class="col-md-6 col-lg-4" *ngFor="let trip of filteredTrips">
+    <app-trip-card [trip]="trip" [deleting]="deletingCode === trip.code" (remove)="requestDelete($event)"></app-trip-card>
+  </div>
+</div>

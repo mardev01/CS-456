@@ -1,0 +1,22 @@
+
+> travlr-admin@0.0.0 build
+> ng build
+
+- Building...
+
+Initial chunk files   | Names         |  Raw size | Estimated transfer size
+main-352AL7SZ.js      | main          | 230.01 kB |                62.94 kB
+styles-GKPLSGE2.css   | styles        | 226.40 kB |                22.01 kB
+polyfills-FFHMD2TL.js | polyfills     |  33.71 kB |                11.02 kB
+
+                      | Initial total | 490.12 kB |                95.97 kB
+
+Output location: /Users/marwan/Downloads/Module 1/CS-456/travlr/app_admin/dist/travlr-admin
+
+Application bundle generation complete. [3.901 seconds]
+
+▲ [WARNING] 2 rules skipped due to selector errors:
+  .form-floating>~label -> Did not expect successive traversals.
+  .form-floating>~label -> Did not expect successive traversals.
+
+

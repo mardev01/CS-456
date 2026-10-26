@@ -1,0 +1,418 @@
+diff --git a/.gitignore b/.gitignore
+index d0cf50f..c49889b 100644
+--- a/.gitignore
++++ b/.gitignore
+@@ -1,3 +1,3 @@
+-node_modules/
+-.env
++node_modules/
++.env
+ .vs/
+\ No newline at end of file
+diff --git a/travlr/app.js b/travlr/app.js
+index 8fb608b..f5c15d0 100644
+--- a/travlr/app.js
++++ b/travlr/app.js
+@@ -8,7 +8,8 @@ var handlebars = require('hbs');
+ var indexRouter = require('./app_server/routes/index');
+ var usersRouter = require('./app_server/routes/users');
+ var travelRouter = require('./app_server/routes/travel');
+-const { connect } = require('./app_server/models/db');
++var apiRouter = require('./app_api/routes/index');
++const { connect } = require('./app_api/models/db');
+ connect().catch((err) => console.error('Database startup failed:', err));
+ 
+ var app = express();
+@@ -27,6 +28,7 @@ app.use(express.static(path.join(__dirname, 'public')));
+ app.use('/', indexRouter);
+ app.use('/users', usersRouter);
+ app.use('/travel', travelRouter);
++app.use('/api', apiRouter);
+ 
+ // catch 404 and forward to error handler
+ app.use(function(req, res, next) {
+diff --git a/travlr/app_server/controllers/main.js b/travlr/app_server/controllers/main.js
+index 9691433..d04ff2b 100644
+--- a/travlr/app_server/controllers/main.js
++++ b/travlr/app_server/controllers/main.js
+@@ -1,7 +1,7 @@
+-const index = (req, res) => {
+-    res.render('index', { title: 'Travlr Getaways' });
+-};
+-
+-module.exports = {
+-    index
++const index = (req, res) => {
++    res.render('index', { title: 'Travlr Getaways' });
++};
++
++module.exports = {
++    index
+ };
+\ No newline at end of file
+diff --git a/travlr/app_server/controllers/travel.js b/travlr/app_server/controllers/travel.js
+index df198bd..88c68a4 100644
+--- a/travlr/app_server/controllers/travel.js
++++ b/travlr/app_server/controllers/travel.js
+@@ -1,14 +1,30 @@
+-/* GET travel view */
+-const travel = (req, res) => {
+-    var fs = require('fs');
+-    var trips = JSON.parse(fs.readFileSync('./data/trips.json', 'utf8'));
+-
+-    res.render('travel', {
+-        title: 'Travlr Getaways',
+-        trips
+-    });
+-};
+-
+-module.exports = {
+-    travel
+-};
+\ No newline at end of file
++const tripsEndpoint = 'http://localhost:3000/api/trips';
++
++const travel = async function (req, res, next) {
++    try {
++        const response = await fetch(tripsEndpoint, {
++            headers: { Accept: 'application/json' }
++        });
++
++        if (!response.ok) {
++            throw new Error(
++                `Trips API returned status ${response.status}`
++            );
++        }
++
++        const trips = await response.json();
++
++        if (!Array.isArray(trips)) {
++            throw new Error('Trips API returned unexpected data');
++        }
++
++        res.render('travel', {
++            title: 'Travlr Getaways',
++            trips
++        });
++    } catch (err) {
++        next(err);
++    }
++};
++
++module.exports = { travel };
+diff --git a/travlr/app_server/models/db.js b/travlr/app_server/models/db.js
+deleted file mode 100644
+index 9d74589..0000000
+--- a/travlr/app_server/models/db.js
++++ /dev/null
+@@ -1,17 +0,0 @@
+-﻿const mongoose = require('mongoose');
+-
+-const dbURI = process.env.DB_HOST || 'mongodb://127.0.0.1:27017/travlr';
+-
+-mongoose.connection.on('connected', () => {
+-    console.log(`Mongoose connected to ${dbURI}`);
+-});
+-mongoose.connection.on('error', (err) => {
+-    console.error('Mongoose connection error:', err);
+-});
+-mongoose.connection.on('disconnected', () => {
+-    console.log('Mongoose disconnected');
+-});
+-
+-const connect = () => mongoose.connect(dbURI);
+-
+-module.exports = { mongoose, connect };
+\ No newline at end of file
+diff --git a/travlr/app_server/models/seed.js b/travlr/app_server/models/seed.js
+deleted file mode 100644
+index fb4753a..0000000
+--- a/travlr/app_server/models/seed.js
++++ /dev/null
+@@ -1,28 +0,0 @@
+-﻿const fs = require('fs');
+-const path = require('path');
+-const { mongoose, connect } = require('./db');
+-const Trip = require('./travlr');
+-
+-async function seed() {
+-    try {
+-        const file = path.join(__dirname, '..', '..', 'data', 'trips.json');
+-        const trips = JSON.parse(fs.readFileSync(file, 'utf8'));
+-
+-        if (!Array.isArray(trips) || trips.length !== 3) {
+-            throw new Error('Expected an array of three trips in data/trips.json');
+-        }
+-
+-        await connect();
+-        await Promise.all(trips.map((trip) => new Trip(trip).validate()));
+-        await Trip.deleteMany({});
+-        await Trip.insertMany(trips);
+-        console.log(`Loaded ${trips.length} trips`);
+-    } catch (err) {
+-        console.error('Seeding failed:', err);
+-        process.exitCode = 1;
+-    } finally {
+-        await mongoose.disconnect();
+-    }
+-}
+-
+-seed();
+\ No newline at end of file
+diff --git a/travlr/app_server/models/travlr.js b/travlr/app_server/models/travlr.js
+deleted file mode 100644
+index ce9d36a..0000000
+--- a/travlr/app_server/models/travlr.js
++++ /dev/null
+@@ -1,17 +0,0 @@
+-{
+-    const mongoose = require('mongoose');
+-
+-    const tripSchema = new mongoose.Schema({
+-        code: { type: String, required: true, index: true },
+-        name: { type: String, required: true, index: true },
+-        length: { type: String, required: true },
+-        start: { type: Date, required: true },
+-        resort: { type: String, required: true },
+-        perPerson: { type: String, required: true },
+-        image: { type: String, required: true },
+-        description: { type: String, required: true }
+-    });
+-
+-    module.exports = mongoose.model('trips', tripSchema, 'trips');
+-
+-}
+diff --git a/travlr/app_server/routes/travel.js b/travlr/app_server/routes/travel.js
+index b96c005..25004a6 100644
+--- a/travlr/app_server/routes/travel.js
++++ b/travlr/app_server/routes/travel.js
+@@ -1,8 +1,8 @@
+-const express = require('express');
+-const router = express.Router();
+-const controller = require('../controllers/travel');
+-
+-/* GET travel page */
+-router.get('/', controller.travel);
+-
++const express = require('express');
++const router = express.Router();
++const controller = require('../controllers/travel');
++
++/* GET travel page */
++router.get('/', controller.travel);
++
+ module.exports = router;
+\ No newline at end of file
+diff --git a/travlr/app_server/views/partials/header.hbs b/travlr/app_server/views/partials/header.hbs
+index 5584ac1..a0bd16d 100644
+--- a/travlr/app_server/views/partials/header.hbs
++++ b/travlr/app_server/views/partials/header.hbs
+@@ -1,30 +1,30 @@
+-﻿<div id="header">
+-    <div id="logo">
+-        <a href="index.html"><img src="images/logo.png" alt="LOGO" height="100" width="200"></a>
+-    </div>
+-    <div id="navigation">
+-        <ul>
+-            <li>
+-                <a href="index.html">Home</a>
+-            </li>
+-            <li class="selected">
+-                <a href="/travel">Travel</a>
+-            </li>
+-            <li>
+-                <a href="rooms.html">Rooms</a>
+-            </li>
+-            <li>
+-                <a href="meals.html">Meals</a>
+-            </li>
+-            <li>
+-                <a href="news.html">News</a>
+-            </li>
+-            <li>
+-                <a href="about.html">About</a>
+-            </li>
+-            <li>
+-                <a href="contact.html">Contact</a>
+-            </li>
+-        </ul>
+-    </div>
++﻿<div id="header">
++    <div id="logo">
++        <a href="index.html"><img src="images/logo.png" alt="LOGO" height="100" width="200"></a>
++    </div>
++    <div id="navigation">
++        <ul>
++            <li>
++                <a href="index.html">Home</a>
++            </li>
++            <li class="selected">
++                <a href="/travel">Travel</a>
++            </li>
++            <li>
++                <a href="rooms.html">Rooms</a>
++            </li>
++            <li>
++                <a href="meals.html">Meals</a>
++            </li>
++            <li>
++                <a href="news.html">News</a>
++            </li>
++            <li>
++                <a href="about.html">About</a>
++            </li>
++            <li>
++                <a href="contact.html">Contact</a>
++            </li>
++        </ul>
++    </div>
+ </div>
+\ No newline at end of file
+diff --git a/travlr/app_server/views/travel.hbs b/travlr/app_server/views/travel.hbs
+index 329883a..7e66777 100644
+--- a/travlr/app_server/views/travel.hbs
++++ b/travlr/app_server/views/travel.hbs
+@@ -1,35 +1,39 @@
+-<!DOCTYPE html>
+-<!-- Website template by freewebsitetemplates.com -->
+-<html>
+-<head>
+-	<meta charset="UTF-8">
+-	<title>Dive Sites - Bhaccasyoniztas Beach Resort Website Template</title>
+-	<link rel="stylesheet" href="css/style.css" type="text/css">
+-</head>
+-<body>
+-	<div id="background">
+-		<div id="page">
+-			{{> header }}
+-			<div id="contents">
+-				<div class="box">
+-					<div>
+-						<div class="body">
+-							<h1>Travel</h1>
+-							<ul id="sites">
+-								{{#each trips}}
+-								<li>
+-									<a href="/travel"><img src="images/{{this.image}}" alt="{{this.name}}"></a>
+-									<h2><a href="/travel">{{this.name}}</a></h2>
+-									{{{this.description}}}
+-								</li>
+-								{{/each}}
+-							</ul>
+-						</div>
+-					</div>
+-				</div>
+-			</div>
+-		</div>
+-		{{> footer }}
+-	</div>
+-</body>
++<!DOCTYPE html>
++<!-- Website template by freewebsitetemplates.com -->
++<html>
++<head>
++	<meta charset="UTF-8">
++	<title>Travel - Travlr Getaways</title>
++	<link rel="stylesheet" href="/css/style.css" type="text/css">
++</head>
++<body>
++	<div id="background">
++		<div id="page">
++			{{> header }}
++			<div id="contents">
++				<div class="box">
++					<div>
++						<div class="body">
++							<h1>Travel</h1>
++							<ul id="sites">
++								{{#each trips}}
++								<li>
++									<a href="/api/trips/{{this.code}}">
++										<img src="/images/{{this.image}}" alt="{{this.name}}">
++									</a>
++									<h2>
++										<a href="/api/trips/{{this.code}}">{{this.name}}</a>
++									</h2>
++									{{{this.description}}}
++								</li>
++								{{/each}}
++							</ul>
++						</div>
++					</div>
++				</div>
++			</div>
++		</div>
++		{{> footer }}
++	</div>
++</body>
+ </html>
+\ No newline at end of file
+diff --git a/travlr/data/trips.json b/travlr/data/trips.json
+index 0d88d28..3a19f17 100644
+--- a/travlr/data/trips.json
++++ b/travlr/data/trips.json
+@@ -1,32 +1,32 @@
+-[
+-  {
+-    "code": "GALR210214",
+-    "name": "Gale Reef",
+-    "length": "4 nights / 5 days",
+-    "start": "2021-02-14T08:00:00Z",
+-    "resort": "Emerald Bay, 3 stars",
+-    "perPerson": "799.00",
+-    "image": "reef1.jpg",
+-    "description": "<p>Gale Reef Sed et augue lorem. In sit amet placerat arcu. Mauris volutpat ipsum ac justo mollis vel vestibulum orci gravida. Vestibulum sit amet porttitor odio. Nulla facilisi. Fusce at pretium felis. Sed consequat libero ut turpis venenatis ut aliquam risus semper. Etiam convallis mi vel risus pretium sodales. Etiam nunc lorem ullamcorper vitae laoreet.</p>"
+-  },
+-  {
+-    "code": "DAWR210315",
+-    "name": "Dawson's Reef",
+-    "length": "4 nights / 5 days",
+-    "start": "2021-03-15T08:00:00Z",
+-    "resort": "Blue Lagoon, 4 stars",
+-    "perPerson": "1199.00",
+-    "image": "reef2.jpg",
+-    "description": "<p>Dawson's Reef Integer magna leo, posuere et dignissim vitae, porttitor at odio. Pellentesque a metus nec magna placerat volutpat. Nunc nisi mi, elementum sit amet aliquet quis, tristique quis nisl. Curabitur odio lacus, blandit ut hendrerit vulputate, vulputate at est. Morbi aliquet viverra metus eu consectetur. In lorem dui, elementum sit amet convallis ac, tincidunt vel sapien.</p>"
+-  },
+-  {
+-    "code": "CLAR210621",
+-    "name": "Claire's Reef",
+-    "length": "4 nights / 5 days",
+-    "start": "2021-06-21T08:00:00Z",
+-    "resort": "Coral Sands, 5 stars",
+-    "perPerson": "1999.00",
+-    "image": "reef3.jpg",
+-    "description": "<p>Claire's Reef Donec sed felis risus. Nulla facilisi. Donec a orci tellus, et auctor odio. Fusce ac orci nibh, quis semper arcu. Cras orci neque, euismod et accumsan ac, sagittis molestie lorem. Proin odio sapien, elementum at tempor non. Vulputate eget libero. In hac habitasse platea dictumst. Integer purus justo, egestas eu consectetur eu, cursus in tortor. Quisque nec nunc ac mi ultrices iaculis.</p>"
+-  }
++[
++  {
++    "code": "GALR210214",
++    "name": "Gale Reef",
++    "length": "4 nights / 5 days",
++    "start": "2021-02-14T08:00:00Z",
++    "resort": "Emerald Bay, 3 stars",
++    "perPerson": "799.00",
++    "image": "reef1.jpg",
++    "description": "<p>Gale Reef Sed et augue lorem. In sit amet placerat arcu. Mauris volutpat ipsum ac justo mollis vel vestibulum orci gravida. Vestibulum sit amet porttitor odio. Nulla facilisi. Fusce at pretium felis. Sed consequat libero ut turpis venenatis ut aliquam risus semper. Etiam convallis mi vel risus pretium sodales. Etiam nunc lorem ullamcorper vitae laoreet.</p>"
++  },
++  {
++    "code": "DAWR210315",
++    "name": "Dawson's Reef",
++    "length": "4 nights / 5 days",
++    "start": "2021-03-15T08:00:00Z",
++    "resort": "Blue Lagoon, 4 stars",
++    "perPerson": "1199.00",
++    "image": "reef2.jpg",
++    "description": "<p>Dawson's Reef Integer magna leo, posuere et dignissim vitae, porttitor at odio. Pellentesque a metus nec magna placerat volutpat. Nunc nisi mi, elementum sit amet aliquet quis, tristique quis nisl. Curabitur odio lacus, blandit ut hendrerit vulputate, vulputate at est. Morbi aliquet viverra metus eu consectetur. In lorem dui, elementum sit amet convallis ac, tincidunt vel sapien.</p>"
++  },
++  {
++    "code": "CLAR210621",
++    "name": "Claire's Reef",
++    "length": "4 nights / 5 days",
++    "start": "2021-06-21T08:00:00Z",
++    "resort": "Coral Sands, 5 stars",
++    "perPerson": "1999.00",
++    "image": "reef3.jpg",
++    "description": "<p>Claire's Reef Donec sed felis risus. Nulla facilisi. Donec a orci tellus, et auctor odio. Fusce ac orci nibh, quis semper arcu. Cras orci neque, euismod et accumsan ac, sagittis molestie lorem. Proin odio sapien, elementum at tempor non. Vulputate eget libero. In hac habitasse platea dictumst. Integer purus justo, egestas eu consectetur eu, cursus in tortor. Quisque nec nunc ac mi ultrices iaculis.</p>"
++  }
+ ]
+\ No newline at end of file

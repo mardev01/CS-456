@@ -1,0 +1,7 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>{{title}} - Travlr Getaways</title><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/customer.css"></head><body><div id="background"><div id="page">{{> header }}<main id="contents"><div class="box"><div><div class="body customer-body"><h1>{{title}}</h1>{{#if error}}<p class="notice error" role="alert">{{error}}</p>{{/if}}
+<img class="itinerary-image" src="/images/{{trip.image}}" alt="{{trip.name}}">
+<p>{{trip.resort}}<br>{{trip.length}} &middot; {{trip.dateLabel}}<br><strong>{{trip.priceLabel}} per person</strong></p>
+{{{trip.description}}}
+{{#if trip.available}}<p><a class="action-link" href="/checkout?tripCode={{trip.code}}">Reserve This Trip</a></p>{{else}}<p>This trip has already departed. Browse our future trips to make a reservation.</p>{{/if}}
+<p><a href="/travel">Back to trips</a></p>
+</div></div></div></main></div>{{> footer }}</div></body></html>

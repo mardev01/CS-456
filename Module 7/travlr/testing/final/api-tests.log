@@ -1,0 +1,168 @@
+
+> travlr@0.0.0 test
+> node --test testing/final/*.test.js
+
+TAP version 13
+# Mongoose connected to mongodb://127.0.0.1:27017/travlr_test_23939
+# GET /api/trips 200 4.533 ms - 2
+# POST /api/trips 401 5.290 ms - 38
+# PUT /api/trips/FINALTEST 401 0.388 ms - 38
+# DELETE /api/trips/FINALTEST 401 0.251 ms - 38
+# POST /api/register 401 0.230 ms - 38
+# Subtest: GET works publicly; POST, PUT, DELETE, and staff registration require authentication
+ok 1 - GET works publicly; POST, PUT, DELETE, and staff registration require authentication
+  ---
+  duration_ms: 293.832041
+  ...
+# POST /api/login 401 42.674 ms - 45
+# POST /api/login 200 40.702 ms - 297
+# Subtest: login rejects incorrect passwords and signs a one-hour JWT for the correct password
+ok 2 - login rejects incorrect passwords and signs a one-hour JWT for the correct password
+  ---
+  duration_ms: 89.969125
+  ...
+# POST /api/trips 401 0.304 ms - 64
+# POST /api/trips 401 0.341 ms - 64
+# POST /api/trips 401 1.132 ms - 28
+# Subtest: tampered, expired, and deleted-user tokens are rejected
+ok 3 - tampered, expired, and deleted-user tokens are rejected
+  ---
+  duration_ms: 6.088083
+  ...
+# POST /api/trips 201 4.960 ms - 299
+# POST /api/trips 409 2.322 ms - 50
+# POST /api/trips 400 2.736 ms - 103
+# POST /api/trips 400 3.910 ms - 329
+# GET /api/trips/FINALTEST 200 4.740 ms - 301
+# Subtest: authorized POST persists a trip, sanitizes HTML, and rejects duplicates and invalid values
+ok 4 - authorized POST persists a trip, sanitizes HTML, and rejects duplicates and invalid values
+  ---
+  duration_ms: 29.300458
+  ...
+# PUT /api/trips/FINALTEST 200 4.524 ms - 243
+# PUT /api/trips/FINALTEST 400 2.269 ms - 103
+# GET /api/trips/FINALTEST 200 1.879 ms - 245
+# PUT /api/trips/MISSING 404 1.698 ms - 28
+# Subtest: authorized PUT persists changes and invalid updates leave the saved trip intact
+ok 5 - authorized PUT persists changes and invalid updates leave the saved trip intact
+  ---
+  duration_ms: 14.1015
+  ...
+# POST /api/register 201 35.181 ms - 301
+# POST /api/register 409 35.584 ms - 56
+# POST /api/register 400 1.496 ms - 78
+# Subtest: only an authenticated administrator can create another staff account
+ok 6 - only an authenticated administrator can create another staff account
+  ---
+  duration_ms: 74.673334
+  ...
+# DELETE /api/trips/FINALTEST 204 1.472 ms - -
+# GET /api/trips/FINALTEST 404 1.227 ms - 28
+# DELETE /api/trips/FINALTEST 404 1.112 ms - 28
+# Subtest: DELETE removes only the selected trip and returns 404 when repeated
+ok 7 - DELETE removes only the selected trip and returns 404 when repeated
+  ---
+  duration_ms: 8.509584
+  ...
+# OPTIONS /api/trips 204 0.327 ms - -
+# POST /api/login 400 0.299 ms - 35
+# Subtest: CORS permits the Angular origin and malformed JSON returns an API error
+ok 8 - CORS permits the Angular origin and malformed JSON returns an API error
+  ---
+  duration_ms: 2.11
+  ...
+# Mongoose disconnected
+# Mongoose connected to mongodb://127.0.0.1:27017/travlr_customer_test_23940
+# GET /api/trips?q=blue&maxPrice=1000 200 5.760 ms - 244
+# GET /api/trips?minPrice=20&maxPrice=10 400 0.613 ms - 51
+# GET /api/trips?minPrice=abc 400 0.207 ms - 51
+# Subtest: public search filters by location and price and rejects bad ranges
+ok 9 - public search filters by location and price and rejects bad ranges
+  ---
+  duration_ms: 324.28725
+  ...
+# POST /api/customer/register 400 9.780 ms - 93
+# POST /api/customer/register 201 42.541 ms - 438
+# POST /api/customer/register 201 37.282 ms - 428
+# POST /api/customer/register 409 36.892 ms - 72
+# POST /api/customer/login 401 34.947 ms - 45
+# POST /api/customer/login 200 37.861 ms - 438
+# Subtest: customer signup validates confirmation, keeps hashes private, and prevents duplicate accounts
+ok 10 - customer signup validates confirmation, keeps hashes private, and prevents duplicate accounts
+  ---
+  duration_ms: 213.294542
+  ...
+# POST /api/trips 401 0.806 ms - 64
+# GET /api/customers 401 0.936 ms - 64
+# GET /api/reservations 401 0.551 ms - 64
+# GET /api/customer/reservations 401 0.303 ms - 47
+# GET /api/customer/reservations 401 0.196 ms - 47
+# Subtest: customer and staff tokens cannot cross their authorization boundaries
+ok 11 - customer and staff tokens cannot cross their authorization boundaries
+  ---
+  duration_ms: 8.853542
+  ...
+# POST /api/customer/reservations 201 9.436 ms - 462
+# POST /api/customer/reservations 200 13.188 ms - 462
+# POST /api/customer/reservations 409 1.571 ms - 69
+# POST /api/customer/reservations 400 0.818 ms - 59
+# Subtest: reservation pricing comes from MongoDB and duplicate checkout does not create another booking
+ok 12 - reservation pricing comes from MongoDB and duplicate checkout does not create another booking
+  ---
+  duration_ms: 29.352083
+  ...
+# GET /api/customer/reservations/6ad56b7b9fe974e68022ede0 404 1.347 ms - 36
+# PATCH /api/customer/reservations/6ad56b7b9fe974e68022ede0/cancel 404 1.168 ms - 36
+# GET /api/customer/reservations 200 1.287 ms - 2
+# GET /api/customer/reservations/6ad56b7b9fe974e68022ede0 200 1.668 ms - 462
+# PATCH /api/customer/reservations/6ad56b7b9fe974e68022ede0/cancel 200 2.924 ms - 462
+# Subtest: customers can read and cancel only their own itinerary
+ok 13 - customers can read and cancel only their own itinerary
+  ---
+  duration_ms: 11.615625
+  ...
+# GET /api/customers 200 1.734 ms - 261
+# PATCH /api/customers/6ad56b7b9fe974e68022eddd 200 2.184 ms - 132
+# GET /api/customer/me 401 0.563 ms - 67
+# PATCH /api/customers/6ad56b7b9fe974e68022eddd 200 0.995 ms - 131
+# GET /api/reservations 200 4.258 ms - 516
+# PATCH /api/reservations/6ad56b7b9fe974e68022ede0 200 2.061 ms - 514
+# PATCH /api/reservations/6ad56b7b9fe974e68022ede0 400 0.636 ms - 44
+# Subtest: staff can manage customers and reservations without exposing password hashes
+ok 14 - staff can manage customers and reservations without exposing password hashes
+  ---
+  duration_ms: 15.712625
+  ...
+# GET /api/customer/reservations/6ad56b7b9fe974e68022ede0 200 0.931 ms - 462
+# GET /api/customer/reservations/6ad56b7b9fe974e68022ede0 200 0.848 ms - 462
+# Subtest: itineraries preserve the booked price and details after the trip changes or is removed
+ok 15 - itineraries preserve the booked price and details after the trip changes or is removed
+  ---
+  duration_ms: 4.315
+  ...
+# POST /api/customer/reservations 400 1.218 ms - 74
+# Subtest: past trips cannot be reserved
+ok 16 - past trips cannot be reserved
+  ---
+  duration_ms: 2.831917
+  ...
+# GET /account/login 200 7.136 ms - 2860
+# POST /account/login 403 1.567 ms - 2194
+# GET /checkout?tripCode=MOUNTAIN 302 0.494 ms - 79
+# POST /api/customer/login 200 30.266 ms - 438
+# POST /account/login 302 31.288 ms - 35
+# Subtest: public forms reject missing CSRF tokens and redirects preserve protected checkout
+ok 17 - public forms reject missing CSRF tokens and redirects preserve protected checkout
+  ---
+  duration_ms: 42.732916
+  ...
+# Mongoose disconnected
+1..17
+# tests 17
+# suites 0
+# pass 17
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 996.797375

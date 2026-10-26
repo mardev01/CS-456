@@ -1,0 +1,117 @@
+Mongoose connected to mongodb://127.0.0.1:27017/travlr_module7_test_26866
+newman
+
+Module Seven Staff Authentication and CRUD
+
+→ Public GET all trips
+  GET http://127.0.0.1:56482/api/trips GET /api/trips 200 15.396 ms - 2
+[200 OK, 403B, 31ms]
+  ✓  Expected status 200
+  ✓  JSON response
+  ✓  Trip list
+
+→ Missing trip returns 404
+  GET http://127.0.0.1:56482/api/trips/NO_SUCH_FINAL_TRIP GET /api/trips/NO_SUCH_FINAL_TRIP 404 3.236 ms - 28
+[404 Not Found, 438B, 6ms]
+  ✓  Expected status 404
+  ✓  JSON response
+
+→ Unsigned write blocked
+  POST http://127.0.0.1:56482/api/trips POST /api/trips 401 6.191 ms - 38
+[401 Unauthorized, 451B, 8ms]
+  ✓  Expected status 401
+  ✓  JSON response
+
+→ Unsigned staff registration blocked
+  POST http://127.0.0.1:56482/api/register POST /api/register 401 0.957 ms - 38
+[401 Unauthorized, 451B, 4ms]
+  ✓  Expected status 401
+
+→ Incorrect password rejected
+  POST http://127.0.0.1:56482/api/login POST /api/login 401 35.419 ms - 45
+[401 Unauthorized, 532B, 36ms]
+  ✓  Expected status 401
+  ✓  JSON response
+
+→ Administrator login
+  POST http://127.0.0.1:56482/api/login POST /api/login 200 31.447 ms - 321
+[200 OK, 800B, 33ms]
+  ✓  Expected status 200
+  ✓  JSON response
+  ✓  Token issued
+
+→ Authenticated staff registration
+  POST http://127.0.0.1:56482/api/register POST /api/register 201 33.402 ms - 327
+[201 Created, 737B, 35ms]
+  ✓  Expected status 201
+  ✓  Staff token issued
+  ✓  Password fields not returned
+
+→ Duplicate staff email rejected
+  POST http://127.0.0.1:56482/api/register POST /api/register 409 35.617 ms - 56
+[409 Conflict, 465B, 38ms]
+  ✓  Expected status 409
+
+→ New mock staff can log in
+  POST http://127.0.0.1:56482/api/login POST /api/login 200 28.852 ms - 327
+[200 OK, 806B, 31ms]
+  ✓  Expected status 200
+  ✓  New staff token issued
+
+→ POST trip
+  POST http://127.0.0.1:56482/api/trips POST /api/trips 201 7.399 ms - 251
+[201 Created, 660B, 9ms]
+  ✓  Expected status 201
+  ✓  JSON response
+
+→ GET saved trip
+  GET http://127.0.0.1:56482/api/trips/FINALPOSTMAN GET /api/trips/FINALPOSTMAN 200 1.008 ms - 253
+[200 OK, 657B, 1ms]
+  ✓  Expected status 200
+  ✓  JSON response
+  ✓  Saved name
+
+→ PUT trip
+  PUT http://127.0.0.1:56482/api/trips/FINALPOSTMAN PUT /api/trips/FINALPOSTMAN 200 10.005 ms - 260
+[200 OK, 665B, 10ms]
+  ✓  Expected status 200
+  ✓  JSON response
+
+→ GET persisted update
+  GET http://127.0.0.1:56482/api/trips/FINALPOSTMAN GET /api/trips/FINALPOSTMAN 200 1.994 ms - 262
+[200 OK, 667B, 3ms]
+  ✓  Expected status 200
+  ✓  JSON response
+  ✓  Updated name and price
+
+→ DELETE temporary trip
+  DELETE http://127.0.0.1:56482/api/trips/FINALPOSTMAN DELETE /api/trips/FINALPOSTMAN 204 1.994 ms - -
+[204 No Content, 302B, 2ms]
+  ✓  Expected status 204
+
+→ Deleted trip returns 404
+  GET http://127.0.0.1:56482/api/trips/FINALPOSTMAN GET /api/trips/FINALPOSTMAN 404 0.871 ms - 28
+[404 Not Found, 438B, 2ms]
+  ✓  Expected status 404
+  ✓  JSON response
+
+┌─────────────────────────┬──────────────────┬──────────────────┐
+│                         │         executed │           failed │
+├─────────────────────────┼──────────────────┼──────────────────┤
+│              iterations │                1 │                0 │
+├─────────────────────────┼──────────────────┼──────────────────┤
+│                requests │               15 │                0 │
+├─────────────────────────┼──────────────────┼──────────────────┤
+│            test-scripts │               15 │                0 │
+├─────────────────────────┼──────────────────┼──────────────────┤
+│      prerequest-scripts │                0 │                0 │
+├─────────────────────────┼──────────────────┼──────────────────┤
+│              assertions │               32 │                0 │
+├─────────────────────────┴──────────────────┴──────────────────┤
+│ total run duration: 420ms                                     │
+├───────────────────────────────────────────────────────────────┤
+│ total data received: 2.24kB (approx)                          │
+├───────────────────────────────────────────────────────────────┤
+│ average response time: 16ms [min: 1ms, max: 38ms, s.d.: 14ms] │
+└───────────────────────────────────────────────────────────────┘
+Mongoose disconnected

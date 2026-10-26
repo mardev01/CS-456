@@ -1,0 +1,234 @@
+{
+  "requests": {
+    "total": 15,
+    "pending": 0,
+    "failed": 0
+  },
+  "assertions": {
+    "total": 32,
+    "pending": 0,
+    "failed": 0
+  },
+  "failures": [],
+  "database": "Isolated temporary database; removed after test run.",
+  "checks": [
+    {
+      "name": "Public GET all trips",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "Expected status 200",
+          "passed": true
+        },
+        {
+          "name": "JSON response",
+          "passed": true
+        },
+        {
+          "name": "Trip list",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "Missing trip returns 404",
+      "status": 404,
+      "assertions": [
+        {
+          "name": "Expected status 404",
+          "passed": true
+        },
+        {
+          "name": "JSON response",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "Unsigned write blocked",
+      "status": 401,
+      "assertions": [
+        {
+          "name": "Expected status 401",
+          "passed": true
+        },
+        {
+          "name": "JSON response",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "Unsigned staff registration blocked",
+      "status": 401,
+      "assertions": [
+        {
+          "name": "Expected status 401",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "Incorrect password rejected",
+      "status": 401,
+      "assertions": [
+        {
+          "name": "Expected status 401",
+          "passed": true
+        },
+        {
+          "name": "JSON response",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "Administrator login",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "Expected status 200",
+          "passed": true
+        },
+        {
+          "name": "JSON response",
+          "passed": true
+        },
+        {
+          "name": "Token issued",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "Authenticated staff registration",
+      "status": 201,
+      "assertions": [
+        {
+          "name": "Expected status 201",
+          "passed": true
+        },
+        {
+          "name": "Staff token issued",
+          "passed": true
+        },
+        {
+          "name": "Password fields not returned",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "Duplicate staff email rejected",
+      "status": 409,
+      "assertions": [
+        {
+          "name": "Expected status 409",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "New mock staff can log in",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "Expected status 200",
+          "passed": true
+        },
+        {
+          "name": "New staff token issued",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "POST trip",
+      "status": 201,
+      "assertions": [
+        {
+          "name": "Expected status 201",
+          "passed": true
+        },
+        {
+          "name": "JSON response",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "GET saved trip",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "Expected status 200",
+          "passed": true
+        },
+        {
+          "name": "JSON response",
+          "passed": true
+        },
+        {
+          "name": "Saved name",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "PUT trip",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "Expected status 200",
+          "passed": true
+        },
+        {
+          "name": "JSON response",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "GET persisted update",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "Expected status 200",
+          "passed": true
+        },
+        {
+          "name": "JSON response",
+          "passed": true
+        },
+        {
+          "name": "Updated name and price",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "DELETE temporary trip",
+      "status": 204,
+      "assertions": [
+        {
+          "name": "Expected status 204",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "Deleted trip returns 404",
+      "status": 404,
+      "assertions": [
+        {
+          "name": "Expected status 404",
+          "passed": true
+        },
+        {
+          "name": "JSON response",
+          "passed": true
+        }
+      ]
+    }
+  ]
+}

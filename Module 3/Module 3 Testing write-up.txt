@@ -1,0 +1,13 @@
+Module 3 Testing
+
+1. Started the Express application using npm start.
+Result: The server started successfully without errors.
+
+2. Navigated to http://localhost:3000/travel.
+Result: The Handlebars template rendered successfully.
+
+3. Verified that Gale Reef, Dawson's Reef, and Claire's Reef were dynamically loaded from data/trips.json.
+Result: All three trip names, images, and descriptions displayed correctly and attached a screenshot of it.
+
+4. Verified the shared header and footer partials.
+Result: Both partials rendered correctly.
