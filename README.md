@@ -8,7 +8,7 @@ The final app is in [Module 7 → Project Two → travlr](Module%207/Project%20T
 
 | Folder | Work included |
 | --- | --- |
-| [Module 1](Module%201) | Initial Express website and screenshot. |
+| [Module 1](Module%201) | Initial Express website. |
 | [Module 2](Module%202) | Customer site organized with routes, controllers, and Handlebars views. |
 | [Module 3](Module%203) | Trip information loaded from JSON, testing notes, screenshot, and design document. |
 | [Module 4](Module%204) | The application snapshot saved for this module. |
@@ -46,7 +46,25 @@ The saved [final test results](Module%207/Project%20Two/travlr/testing/final) sh
 
 ## Application screenshots
 
-These screenshots show the Module 7 admin workflow.
+These screenshots show the Module 6 customer pages and the Module 7 admin workflow.
+
+### Customer website home page
+
+I checked the customer home page after starting Express. The page loaded with the navigation, images, and shared layout.
+
+![Customer home page](Module%206/travlr%20copy/testing/module6/07-express-home-npm-start.jpg)
+
+### Customer travel page
+
+I checked the Travel page to see the trip names, descriptions, and images displayed from the database through the API.
+
+![Customer travel page](Module%206/travlr%20copy/testing/module6/07-express-travel-database.jpg)
+
+### Updated trips on the customer site
+
+I checked the customer page again after updating the trip data. This Module 6 screenshot includes Coral Cove Escape Deluxe and a temporary API test trip.
+
+![Updated customer trip listing](Module%206/travlr%20copy/testing/module6/12-public-updated-trip.jpg)
 
 ### Administrator login
 
@@ -74,9 +92,9 @@ The success message and updated listing showed that the change was saved.
 
 ## Reflection
 
-This course helped me understand how the frontend, backend, and database work together. I became more comfortable tracing requests, fixing problems, and testing security instead of only checking how a page looks.
+This course helped me understand how the frontend, backend, and database work together. I became more comfortable following a request through the application instead of only looking at the screen where the problem appeared. I also learned that adding login is only one part of security. The server still needs to validate input and decide what each request is allowed to do.
 
-I can now show employers experience with Express, Angular, MongoDB, APIs, and authentication. I still have more to learn, but I am more confident building an app in stages and explaining my choices.
+For my professional goals, this project gives me work I can show and explain to an employer. It demonstrates experience with Express, Angular, MongoDB, API testing, and authentication. I still have more to learn, but I am more confident building an application in stages, troubleshooting its different parts, and documenting how it works. Keeping the module versions also gives me a way to look back at the choices I made and explain how the project improved.
 
 ## Running the app
 
